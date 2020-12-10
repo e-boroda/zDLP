@@ -7,10 +7,10 @@ and prevents them by monitoring, detecting and blocking sensitive data while in 
 in motion (network traffic), and at rest (data storage).
 '''
 Today features:
-Client-server architecture;
+Client-server architecture: (Where Server - agent on checked host and Client is host-manager) ;
 CLI manage;
-Scan & Check files (of many types, including images) on client for text patterns;
-Scan & Check files in archives (.rar), applying a list of predefined passwords;
+Scan & Check files (of many types, including images) on agent host for text patterns;
+Scan & Check files on agent host in archives (.rar), applying a list of predefined passwords;
 Save results to SQLite DB;
 
 
