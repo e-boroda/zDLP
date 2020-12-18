@@ -19,6 +19,7 @@
 
 import os
 import tempfile
+import datetime
 import re
 from unrar import rarfile
 import config as cfg
@@ -33,6 +34,10 @@ def esc(string):
     Escape strings for SQLite queries
     """
     return string.replace("'", "''")
+
+
+def get_datetime_from_timestamp(timestamp, fmt="%Y-%m-%d %H:%M:%S"):
+    return datetime.datetime.fromtimestamp(timestamp).strftime(fmt)
 
 
 def get_tmp_name(schema='temp'):
@@ -62,6 +67,15 @@ def get_remote_file(server, remote_path_name, local_path_name):
     with open(local_path_name, 'wb') as f:
         for block in server.read_file(remote_path_name):
             f.write(block)
+
+
+def list_files(root):
+    for entry in os.scandir(root):
+        name = entry.name
+        ftype = 'd' if entry.is_dir() else 'f'
+        stat = entry.stat()
+        mtime = get_datetime_from_timestamp(stat.st_mtime)
+        yield ftype, mtime, name
 
 
 def open_rar(rarfile_module: rarfile, path, passwd=None):

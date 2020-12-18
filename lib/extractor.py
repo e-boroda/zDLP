@@ -97,7 +97,7 @@ class Extractor:
         except BadZipFile as bzf:
             return (cfg.STATUS_ERR, f"BadZipFile in extract:{str(bzf)}")
         except XLRDError as xlrde:
-            return (cfg.STATUS_ERR, f"BadZipFile in extract:{str(xlrde)}")
+            return (cfg.STATUS_ERR, f"XLRDError in extract:{str(xlrde)}")
         except ValueError as err:
             log.debug(f"==>Textract:{self.path} ValueError:{str(err)}")
             return cfg.STATUS_ERR, f"ValueError in extract:{str(err)}"

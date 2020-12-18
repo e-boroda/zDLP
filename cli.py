@@ -42,7 +42,7 @@ if cfg.LOCAL_TEST:
 
 
 def get_server(host):
-    proxy_url = f'http://{host}:{cfg.RPC_PORT}'
+    proxy_url = f'http://{host}:{cfg.RPC_PORT}'  # TODO - problem with nonASCII chars in hostname!!!
     return xmlrpc.client.ServerProxy(proxy_url)
 
 
@@ -229,8 +229,21 @@ def check_host(host):
         log.info(f"Work done! Look at ZDB for results.")
 
 
-def copy_files_from():
+@cli.command()
+@click.option('--host', prompt="Host name", help='Host name from where copy file')
+@click.option('--path', prompt="Root path", help='Root path')
+@click.option('--to-dir', default=cfg.TMP_DIR_PATH, prompt="Destination dir", help='Destination dir')
+def copy_file_from(host, path, to_dir):
     pass
+
+
+@cli.command()
+@click.option('--host', default=cfg.HOST_NAME, prompt="Host name", help='Host name')
+@click.option('--root', default=cfg.DEFAULT_SCAN_ROOT_PATH, prompt="Root path", help='Root path')
+def list_files_from(host, root):
+    srv = get_server(host) if not cfg.LOCAL_TEST else ...
+    for ftype, mtime, name in srv.list_files(root):
+        print(f"{ftype} {mtime} {name}")
 
 
 if __name__ == '__main__':

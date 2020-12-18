@@ -24,6 +24,7 @@ from lib.scanner import Scanner
 from lib.extractor import Extractor
 from lib.finder import Finder
 from lib import logger
+from lib import util
 
 log = logger.get_logger(__name__)
 
@@ -33,7 +34,7 @@ class RequestHandler(SimpleXMLRPCRequestHandler):
     rpc_paths = ('/RPC2',)
 
     def log_message(format, *args, **kwargs):
-        pass
+        pass  # TODO log it to logfile
 
 
 def check_object(path, protocol):
@@ -55,6 +56,13 @@ def get_object(path, protocol='file'):
         ...  # TODO
 
 
+def list_files(root):
+    files_info = list()
+    for ftype, mtime, filename in util.list_files(root):
+        files_info.append((ftype, mtime, filename))
+    return files_info
+
+
 def create_server(bind_host='', bind_port=cfg.RPC_PORT):
     """Create an XML-RPC server instance"""
     server = SimpleXMLRPCServer((bind_host, bind_port),
@@ -63,6 +71,7 @@ def create_server(bind_host='', bind_port=cfg.RPC_PORT):
     # @server.register_function
     server.register_function(check_object)
     server.register_function(get_object)
+    server.register_function(list_files)
     server.register_instance(Scanner(), allow_dotted_names=True)
     server.register_multicall_functions()
     # @server.register_function
