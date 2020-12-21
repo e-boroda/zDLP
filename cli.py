@@ -176,7 +176,7 @@ def list_all(status):
     """
     db = ZDB()
     print(cfg.CSV_SEPARATOR.join(ZObj(range(10)).__dict__.keys()))
-    for row in db.get_obj(status):
+    for row in db.get_all_obj(status):
         print(cfg.CSV_SEPARATOR.join([str(s) for s in row]))
 
 

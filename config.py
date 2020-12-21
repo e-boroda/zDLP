@@ -47,7 +47,7 @@ RPC_SERVER_PROXY_URL = f'http://{RPC_SERVER}:{RPC_PORT}'
 BLOCK_SIZE = 1024  # bytes
 
 
-# Object's status
+# Object's status TODO refactor it to dict
 STATUS_OK = 'OK'  # check passed, no pattern find
 STATUS_FIND = '!!!'  # check passed, find pattern
 STATUS_ERR = 'Err'  # check no passed due to error
