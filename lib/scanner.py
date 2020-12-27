@@ -26,7 +26,7 @@ from unrar import rarfile
 import config as cfg
 import lib.util as util
 # import src.lib.zdb as db
-from lib.common import AbstractScanner, UnknownContainerType
+# from lib.common import AbstractScanner, UnknownContainerType
 #from lib.util import open_rar, dedot
 from . import logger
 
@@ -148,14 +148,6 @@ class Scanner:
             util.unpack_zip()
         else:
             raise
-
-
-class ArScanner(AbstractScanner):
-    def __init__(self):
-        super().__init__()
-
-    def scan(self):
-        ...
 
 
 
