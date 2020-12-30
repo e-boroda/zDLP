@@ -16,3 +16,13 @@ Save results to SQLite DB;
 
 2020.12.11 - Initial Pre Alpha version
 
+Roadmap:
+Initial functionality 
+	Client-server (XML-RPC)
+	Scan directory tree
+	Store paths and other info in DB
+	Extract text from paths
+	Search for RE in extracted text
+Work with containers (easy way: like with single file, don't store contained paths in DB)
+	rar
+	zip
